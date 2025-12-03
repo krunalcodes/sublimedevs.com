@@ -1,5 +1,6 @@
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
+import { NavSettings } from '@/components/nav-settings';
 import { NavUser } from '@/components/nav-user';
 import {
     Sidebar,
@@ -54,6 +55,11 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
+                <div className="px-2 py-0">
+                    <SidebarMenu>
+                        <NavSettings />
+                    </SidebarMenu>
+                </div>
             </SidebarContent>
 
             <SidebarFooter>
