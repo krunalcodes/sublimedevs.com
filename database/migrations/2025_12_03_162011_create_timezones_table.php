@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('zone');
             $table->timestamps();
         });
+
+        // Add foreign key constraints to users table
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('country_id')->references('id')->on('countries')->nullOnDelete();
+            $table->foreign('timezone_id')->references('id')->on('timezones')->nullOnDelete();
+        });
     }
 
     /**
@@ -24,6 +30,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['country_id']);
+            $table->dropForeign(['timezone_id']);
+        });
+
         Schema::dropIfExists('timezones');
     }
 };
