@@ -2,12 +2,28 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+function CardContainer({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-container"
+      className={cn(
+        "rounded-xl border border-border/70 bg-muted/10 p-1.5 dark:border-border/5 dark:bg-muted/50",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        "text-card-foreground flex flex-col rounded-lg",
         className
       )}
       {...props}
@@ -19,7 +35,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-header"
-      className={cn("flex flex-col gap-1.5 px-6", className)}
+      className={cn("flex flex-col pt-2 pb-4 px-4", className)}
       {...props}
     />
   )
@@ -29,7 +45,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn("leading-none text-lg font-semibold", className)}
       {...props}
     />
   )
@@ -49,7 +65,10 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6", className)}
+      className={cn(
+        "bg-card border border-border px-6 py-6 dark:border-border/8 rounded-lg",
+        className
+      )}
       {...props}
     />
   )
@@ -65,4 +84,12 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-export { Card, CardContent,CardDescription, CardFooter, CardHeader, CardTitle }
+export {
+  Card,
+  CardContainer,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+}

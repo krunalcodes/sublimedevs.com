@@ -1,7 +1,14 @@
 import { Head } from '@inertiajs/react';
 
 import AppearanceTabs from '@/components/appearance-tabs';
-import Heading from '@/components/heading';
+import {
+  Card,
+  CardContainer,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { edit as editAppearance } from '@/routes/appearance';
 import { type BreadcrumbItem } from '@/types';
@@ -17,20 +24,20 @@ export default function Appearance() {
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Appearance settings" />
-
-      <div className="px-4 py-6">
-        <Heading
-          title="Appearance"
-          description="Update your account's appearance settings"
-        />
-
-        <div className="flex-1 md:max-w-2xl">
-          <section className="max-w-xl space-y-12">
-            <div className="space-y-6">
+      <div className="mx-auto w-full max-w-5xl px-4 py-6">
+        <CardContainer>
+          <Card>
+            <CardHeader>
+              <CardTitle>Appearance</CardTitle>
+              <CardDescription>
+                Update your account's appearance settings
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
               <AppearanceTabs />
-            </div>
-          </section>
-        </div>
+            </CardContent>
+          </Card>
+        </CardContainer>
       </div>
     </AppLayout>
   );
