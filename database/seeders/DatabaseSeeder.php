@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountrySeeder::class,
             LanguageSeeder::class,
+            TimezoneSeeder::class,
         ]);
     }
 }
