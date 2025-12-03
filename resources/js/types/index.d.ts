@@ -30,13 +30,40 @@ export interface SharedData {
   [key: string]: unknown;
 }
 
+export interface Country {
+  id: number;
+  name: string;
+  code: string;
+  flag: string;
+}
+
+export interface Timezone {
+  id: number;
+  name: string;
+  zone: string;
+}
+
+export interface Language {
+  id: number;
+  name: string;
+  code: string;
+}
+
 export interface User {
   id: number;
   name: string;
   email: string;
-  avatar?: string;
+  avatar?: string | null;
   email_verified_at: string | null;
   two_factor_enabled?: boolean;
+  summary?: string | null;
+  bio?: string | null;
+  city?: string | null;
+  country_id?: number | null;
+  timezone_id?: number | null;
+  country?: Country | null;
+  timezone?: Timezone | null;
+  languages?: Language[];
   created_at: string;
   updated_at: string;
   [key: string]: unknown; // This allows for additional properties...

@@ -3,9 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
@@ -24,6 +26,11 @@ class User extends Authenticatable
         'password',
         'google_id',
         'avatar',
+        'summary',
+        'bio',
+        'city',
+        'country_id',
+        'timezone_id',
     ];
 
     /**
@@ -50,5 +57,51 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Get the country that the user belongs to.
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    /**
+     * Get the timezone that the user belongs to.
+     */
+    public function timezone()
+    {
+        return $this->belongsTo(Timezone::class);
+    }
+
+    /**
+     * Get the languages that the user knows.
+     */
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class, 'user_languages');
+    }
+
+    /**
+     * Get the avatar URL attribute.
+     */
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if (! $value) {
+                    return null;
+                }
+
+                // If it's already a full URL (from Google), return as is
+                if (filter_var($value, FILTER_VALIDATE_URL)) {
+                    return $value;
+                }
+
+                // Otherwise, return the storage URL
+                return Storage::disk('public')->url($value);
+            }
+        );
     }
 }
