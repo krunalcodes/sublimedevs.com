@@ -5,7 +5,6 @@ import { useMemo, useState } from 'react';
 import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import { AvatarDropzone } from '@/components/avatar-dropzone';
 import DeleteUser from '@/components/delete-user';
-import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import {
@@ -112,14 +111,18 @@ export default function Profile({
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Profile settings" />
       <div className="mx-auto max-w-5xl px-4 py-6">
-        <Heading
-          title="Your Developer Profile"
-          description="Please complete as much of your profile as you can, giving as much detail as possible, focussing especially on your skills, interests and experience."
-        />
         <div className="flex-1">
           <section className="space-y-6">
             <CardContainer>
               <Card>
+                <CardHeader>
+                  <CardTitle>Your Developer Profile</CardTitle>
+                  <CardDescription>
+                    Please complete as much of your profile as you can, giving
+                    as much detail as possible, focussing especially on your
+                    skills, interests and experience.
+                  </CardDescription>
+                </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid gap-2 md:max-w-md">
