@@ -31,6 +31,10 @@ class User extends Authenticatable
         'city',
         'country_id',
         'timezone_id',
+        'profile_visibility',
+        'search_status',
+        'hourly_rate',
+        'available_to_start_on',
     ];
 
     /**
@@ -56,6 +60,8 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
+            'available_to_start_on' => 'date',
+            'hourly_rate' => 'decimal:2',
         ];
     }
 
@@ -81,6 +87,30 @@ class User extends Authenticatable
     public function languages()
     {
         return $this->belongsToMany(Language::class, 'user_languages');
+    }
+
+    /**
+     * Get the open to preferences for the user.
+     */
+    public function openTo()
+    {
+        return $this->hasMany(UserOpenTo::class);
+    }
+
+    /**
+     * Get the role levels for the user.
+     */
+    public function roleLevels()
+    {
+        return $this->hasMany(UserRoleLevel::class);
+    }
+
+    /**
+     * Get the environments for the user.
+     */
+    public function environments()
+    {
+        return $this->hasMany(UserEnvironment::class);
     }
 
     /**

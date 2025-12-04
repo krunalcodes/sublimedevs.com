@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->foreignId('country_id')->nullable();
             $table->foreignId('timezone_id')->nullable();
+            $table->enum('profile_visibility', ['public', 'private'])->default('private');
+            $table->enum('search_status', ['open', 'not-available', 'invisible'])->nullable();
+            $table->decimal('hourly_rate', 10, 2)->nullable();
+            $table->date('available_to_start_on')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

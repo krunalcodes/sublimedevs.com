@@ -5,6 +5,7 @@ import {
   Palette,
   Settings,
   Shield,
+  Sliders,
   User,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -23,6 +24,7 @@ import {
 } from '@/components/ui/sidebar';
 import { resolveUrl } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
+import { edit as editPreferences } from '@/routes/preferences/index';
 import { edit as editProfile } from '@/routes/profile';
 import { show as showTwoFactor } from '@/routes/two-factor';
 import { edit as editPassword } from '@/routes/user-password';
@@ -32,6 +34,11 @@ const settingsItems = [
     title: 'Profile',
     href: editProfile(),
     icon: User,
+  },
+  {
+    title: 'Preferences',
+    href: editPreferences(),
+    icon: Sliders,
   },
   {
     title: 'Password',
